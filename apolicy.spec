@@ -1,18 +1,18 @@
 Summary:	ACL Policy Daemon for Postfix
 Name:		apolicy
 Version:	0.73
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPL
 Group:		System/Servers
 Source:		http://download.gna.org/apolicy/%{name}-%{version}.tar.gz
 Source1:	http://download.gna.org/apolicy/%{name}-%{version}.tar.gz.sig
 Source2:	http://www.apolicy.org/gpg/miguelfilho.gpg
 Source3:	apolicy-readme.mdv
-Patch:		apolicy-mdv.patch
+Patch0:		apolicy-mdv.patch
 URL:		http://www.apolicy.org/
 Buildarch:	noarch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot/
-BuildRequires:	python-devel >= 2.3
+%py_requires -d
 Requires:	python-pydns >= 2.3
 Requires:	python-pyspf >= 2.0
 Requires:	python-twisted-core >= 2.4
