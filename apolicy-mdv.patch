@@ -1,0 +1,65 @@
+diff -p -up apolicy-0.73/apolicy.init.mdv apolicy-0.73/apolicy.init
+--- apolicy-0.73/apolicy.init.mdv	2008-05-15 23:17:25.000000000 -0400
++++ apolicy-0.73/apolicy.init	2008-09-08 13:55:48.000000000 -0400
+@@ -3,15 +3,13 @@
+ # chkconfig: - 60 25
+ # description: ACL Policy Daemon for Postfix
+ #
+-# pidfile: /var/run/twistd.pid
++# pidfile: /var/run/apolicy.pid
+ # processname: twistd
+ 
+ ### BEGIN INIT INFO
+ # Provides:          apolicy
+ # Required-Start:    $local_fs $remote_fs $network $postfix
+ # Required-Stop:     $local_fs $remote_fs
+-# Default-Start:     2 3 4 5
+-# Default-Stop:      0 1 6
+ # Short-Description: start and stop the ACL Policy Daemon for Postfix
+ # Description:       ACL Policy Daemon provides extended functionality for
+ #                    the Postfix MTA.
+@@ -33,7 +31,7 @@ start()
+ {
+     echo -n $"Starting $prog: "
+     daemon /usr/bin/twistd -y $SITE_PACKAGES/apolicy/server.py -q \
+-		--logfile /var/log/twistd.log --pidfile=/var/run/twistd.pid
++		--logfile /var/log/apolicy.log --pidfile=/var/run/apolicy.pid
+     RETVAL=$?
+     [ $RETVAL -eq 0 ] && touch /var/lock/subsys/apolicy
+     echo
+@@ -42,7 +40,7 @@ start()
+ stop()
+ {
+     echo -n $"Stopping $prog: "
+-    killproc /usr/bin/twistd
++    killproc -p /var/run/apolicy.pid /usr/bin/twistd
+     RETVAL=$?
+     [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/apolicy
+     echo
+@@ -51,7 +49,7 @@ stop()
+ reload()
+ {
+     echo -n $"Reloading configuration for $prog: "
+-    pid=$(pidfileofproc /usr/bin/twistd)
++    pid=$(pidfproc -p /var/run/apolicy.pid /usr/bin/twistd)
+     kill -s HUP $pid &> /dev/null
+     RETVAL=$?
+     if [ $RETVAL -ne 0 ]; then
+@@ -64,7 +62,7 @@ reload()
+             success
+         else
+             # Process has died while reloading configuration
+-            rm -f /var/run/twistd.pid &> /dev/null
++            rm -f /var/run/apolicy.pid &> /dev/null
+             failure
+         fi
+     fi
+@@ -86,7 +84,7 @@ case "$1" in
+ 	start
+ 	;;
+   status)
+-    status /usr/bin/twistd
++    status -p /var/run/apolicy.pid /usr/bin/twistd
+     RETVAL=$?
+     ;;
+   condrestart)
