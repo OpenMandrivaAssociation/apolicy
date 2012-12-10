@@ -1,7 +1,7 @@
 Summary:	ACL Policy Daemon for Postfix
 Name:		apolicy
 Version:	0.73
-Release:	%mkrel 4
+Release:	5
 License:	GPL
 Group:		System/Servers
 Source:		http://download.gna.org/apolicy/%{name}-%{version}.tar.gz
@@ -11,12 +11,11 @@ Source3:	apolicy-readme.mdv
 Patch0:		apolicy-mdv.patch
 URL:		http://www.apolicy.org/
 Buildarch:	noarch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot/
 %py_requires -d
 Requires:	python-pydns >= 2.3
 Requires:	python-pyspf >= 2.0
 Requires:	python-twisted-core >= 2.4
-Requires:	python-IPy >= 0.53
+Requires:	python-ipy
 Requires:	python-memcached
 Requires(pre):	rpm-helper
 
@@ -42,14 +41,10 @@ perl -spi -e 's/\r$//' docs/*.txt
 python setup.py build
 
 %install
-rm -rf %{buildroot}
 python setup.py install --skip-build --root %{buildroot}
 /bin/mkdir -p %{buildroot}/var/cache/%{name}
 /bin/mkdir -p %{buildroot}%{_initrddir}
 install -c %{name}.init %{buildroot}%{_initrddir}/%{name}
-
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,755)
@@ -68,3 +63,25 @@ rm -rf %{buildroot}
 %preun
 %_preun_service %{name}
 
+
+
+%changelog
+* Sun Oct 31 2010 Funda Wang <fwang@mandriva.org> 0.73-4mdv2011.0
++ Revision: 590785
+- rebuild for py2.7
+
+* Thu Sep 10 2009 Thierry Vignaud <tv@mandriva.org> 0.73-3mdv2010.0
++ Revision: 436655
+- rebuild
+
+* Sun Jan 04 2009 Funda Wang <fwang@mandriva.org> 0.73-2mdv2009.1
++ Revision: 324150
+- rebuild
+
+* Tue Sep 16 2008 Luca Berra <bluca@mandriva.org> 0.73-1mdv2009.0
++ Revision: 285254
+- import apolicy
+
+
+* Mon Sep 08 2008 Luca Berra <bluca@mandriva.org> 0.73-1mdv2009.0
+- Initial mandriva package

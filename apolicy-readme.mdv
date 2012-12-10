@@ -1,0 +1,20 @@
+To actually use this software after package installation you need to configure postfix to use it
+
+Edit postfix configuration files:
+put somethink like the following into /etc/postfix/main.cf:
+
+smtpd_recipient_restrictions =
+  reject_unlisted_recipient
+  ...
+  reject_unauth_destination
+  check_policy_service 127.0.0.1:10001
+
+For the size acl to work correctly, apolicy need to be called this way:
+
+smtpd_end_of_data_restrictions = check_policy_service 127.0.0.1:10001
+
+edit the example acl /etc/apolicy/policy.conf to adapt to your environment.
+remember to enable and start the apolicy service:
+chkconfig apolicy on
+service apolicy start
+or postfix will fail.

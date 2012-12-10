@@ -1,5 +1,2 @@
 sources:
-  "apolicy-0.73.tar.gz:"	8dc36f58f3e4a6537b12e1f5e2d76c8450479dd4
-  "apolicy-0.73.tar.gz.sig:"	740be7aabcbcb246892857d1394afceee7661b01
-  "apolicy-readme.mdv:"	e5c81f02262d90dc0c414336682059f4c8f9ce89
-  "miguelfilho.gpg:"	1f9c7a44d89264db1c4c1307bcb00553538abca2
+  "apolicy-0.73.tar.gz": 8dc36f58f3e4a6537b12e1f5e2d76c8450479dd4
