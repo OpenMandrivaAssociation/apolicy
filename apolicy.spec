@@ -10,8 +10,8 @@ Source2:	http://www.apolicy.org/gpg/miguelfilho.gpg
 Source3:	apolicy-readme.mdv
 Patch0:		apolicy-mdv.patch
 URL:		http://www.apolicy.org/
-Buildarch:	noarch
-%py_requires -d
+BuildArch:	noarch
+BuildRequires: python-devel
 Requires:	python-pydns >= 2.3
 Requires:	python-pyspf >= 2.0
 Requires:	python-twisted-core >= 2.4
@@ -42,8 +42,8 @@ python setup.py build
 
 %install
 python setup.py install --skip-build --root %{buildroot}
-/bin/mkdir -p %{buildroot}/var/cache/%{name}
-/bin/mkdir -p %{buildroot}%{_initrddir}
+mkdir -p %{buildroot}/var/cache/%{name}
+mkdir -p %{buildroot}%{_initrddir}
 install -c %{name}.init %{buildroot}%{_initrddir}/%{name}
 
 %files
@@ -62,26 +62,3 @@ install -c %{name}.init %{buildroot}%{_initrddir}/%{name}
 
 %preun
 %_preun_service %{name}
-
-
-
-%changelog
-* Sun Oct 31 2010 Funda Wang <fwang@mandriva.org> 0.73-4mdv2011.0
-+ Revision: 590785
-- rebuild for py2.7
-
-* Thu Sep 10 2009 Thierry Vignaud <tv@mandriva.org> 0.73-3mdv2010.0
-+ Revision: 436655
-- rebuild
-
-* Sun Jan 04 2009 Funda Wang <fwang@mandriva.org> 0.73-2mdv2009.1
-+ Revision: 324150
-- rebuild
-
-* Tue Sep 16 2008 Luca Berra <bluca@mandriva.org> 0.73-1mdv2009.0
-+ Revision: 285254
-- import apolicy
-
-
-* Mon Sep 08 2008 Luca Berra <bluca@mandriva.org> 0.73-1mdv2009.0
-- Initial mandriva package
