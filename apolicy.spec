@@ -1,7 +1,7 @@
 Summary:	ACL Policy Daemon for Postfix
 Name:		apolicy
 Version:	0.73
-Release:	5
+Release:	6
 License:	GPL
 Group:		System/Servers
 Source:		http://download.gna.org/apolicy/%{name}-%{version}.tar.gz
