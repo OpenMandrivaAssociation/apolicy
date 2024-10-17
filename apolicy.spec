@@ -9,7 +9,7 @@ Source1:	http://download.gna.org/apolicy/%{name}-%{version}.tar.gz.sig
 Source2:	http://www.apolicy.org/gpg/miguelfilho.gpg
 Source3:	apolicy-readme.mdv
 Patch0:		apolicy-mdv.patch
-URL:		http://www.apolicy.org/
+URL:		https://www.apolicy.org/
 BuildArch:	noarch
 BuildRequires: python-devel
 Requires:	python-pydns >= 2.3
